@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import { SubmitHandler, Controller } from 'react-hook-form';
 import { Form } from '@/components/ui/form';
 import { Text } from '@/components/ui/text';
@@ -14,6 +14,8 @@ import {
   statusOptions,
   renderOptionDisplayValue,
   driverOptions,
+  firmOptions,
+  customerOptions,
 } from './form-utils';
 import { AddInvoiceItems } from './add-invoice-items';
 import FormFooter from '@/components/form-footer';
@@ -27,6 +29,12 @@ const invoiceItems = [
   { item: '', description: '', quantity: 1, price: undefined },
 ];
 
+interface Item {
+  id: number;
+  label: string;
+  bal: number;
+}
+
 export default function CreateInvoice({
   id,
   record,
@@ -36,6 +44,34 @@ export default function CreateInvoice({
 }) {
   const [reset, setReset] = useState({});
   const [isLoading, setLoading] = useState(false);
+  const itemsData: Item[] = [
+    { id: 1, label: 'Customer A', bal: 2.5 },
+    { id: 2, label: 'Customer B', bal: 3.0 },
+    { id: 3, label: 'Customer C', bal: 1.8 },
+    { id: 3, label: 'Customer D', bal: 1000 },
+    // Add more items as needed
+  ];
+
+  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  const [balance, setBalance] = useState<number | null>(null);
+
+  const handleItemChange = (value: string) => {
+    const selectedOption = itemsData.find((item) => item.label === value) || null;
+    setBalance(selectedOption ? selectedOption.bal : null);
+    // setSelectedItem(selectedOption ? selectedOption : null)
+  };
+
+  useEffect(() => {
+    // Log the updated balance whenever it changes
+    console.log(balance);
+  }, [balance]);
+
+  // const onChangeWithAdditionalFunction = (onChange: (...event: any[]) => void, selectedOption: string, additionalFunction: (option: string) => void) => {
+  //   return (e: ChangeEvent<HTMLSelectElement>) => {
+  //     additionalFunction(selectedOption);
+  //     onChange(selectedOption)
+  //   };
+  // };
 
   const onSubmit: SubmitHandler<InvoiceFormInput> = (data) => {
     toast.success(
@@ -89,7 +125,7 @@ export default function CreateInvoice({
           <div className="flex-grow pb-10">
             <div className="grid grid-cols-1 gap-8 divide-y divide-dashed divide-gray-200 @2xl:gap-10 @3xl:gap-12">
               <FormBlockWrapper
-                title={'Voucher details'}
+                title={'Voucher details:'}
               // description={'From he who sending this invoice'}
               >
                 <Input
@@ -124,7 +160,7 @@ export default function CreateInvoice({
               </FormBlockWrapper>
 
               <FormBlockWrapper
-                title={'Driver details'}
+                title={'Driver details:'}
                 // description={'To he who will receive this invoice'}
                 className="pt-7 @2xl:pt-9 @3xl:pt-11"
               >
@@ -158,21 +194,56 @@ export default function CreateInvoice({
                     />
                   )}
                 />
+                <Input
+                  label="PayTerm"
+                  placeholder="Enter your payterm"
+                  {...register('payTerm')}
+                  error={errors.payTerm?.message}
+                />
+                <Controller
+                  name="firm"
+                  control={control}
+                  render={({ field: { name, onChange, value } }) => (
+                    <Select
+                      options={firmOptions}
+                      value={value}
+                      onChange={onChange}
+                      name={name}
+                      label="Firm"
+                      error={errors?.firm?.message}
+                      getOptionValue={(option) => option.value}
+                    />
+                  )}
+                />
               </FormBlockWrapper>
 
               <FormBlockWrapper
-                title={'Schedule:'}
+                title={'Customer details:'}
                 description={'To he who will receive this invoice'}
                 className="pt-7 @2xl:pt-9 @3xl:pt-11"
               >
                 <div className="col-span-2 grid grid-cols-1 items-baseline gap-5 @lg:grid-cols-2 @5xl:grid-cols-4">
-                  <Input
-                    label="Invoice Number"
-                    placeholder="Enter invoice number"
-                    {...register('invoiceNumber')}
-                    readOnly
-                    error={errors.invoiceNumber?.message}
-                  />
+                  <div className='flex flex-col'>
+                    <Controller
+                      name="customerName"
+                      control={control}
+                      render={({ field: { name, onChange, value } }) => (
+                        <Select
+                          options={customerOptions}
+                          onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                            onChange(e)
+                            handleItemChange(value)
+                          }}
+                          value={value}
+                          name={name}
+                          label="Customer Name"
+                          error={errors?.customerName?.message}
+                          getOptionValue={(option) => option.value}
+                        />
+                      )}
+                    />
+                    {balance && <div>Balance: {balance}</div>}
+                  </div>
                   <div className="[&>.react-datepicker-wrapper]:w-full">
                     <Controller
                       name="createDate"
@@ -188,7 +259,7 @@ export default function CreateInvoice({
                     />
                   </div>
                   <div className="[&>.react-datepicker-wrapper]:w-full">
-                    <Controller
+                    {/* <Controller
                       name="dueDate"
                       control={control}
                       render={({ field: { value, onChange } }) => (
@@ -202,7 +273,7 @@ export default function CreateInvoice({
                           onChange={onChange}
                         />
                       )}
-                    />
+                    /> */}
                   </div>
                   <Controller
                     name="status"

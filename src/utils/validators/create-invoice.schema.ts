@@ -3,19 +3,28 @@ import { messages } from '@/config/messages';
 
 export const invoiceFormSchema = z.object({
   fromVchno: z.string().min(1, { message: messages.vchIsRequired }),
+  vchDate: z.date({
+    required_error: messages.vchDateIsRequired,
+  }),
   // fromAddress: z.string().min(1, { message: messages.addressIsRequired }),
-  fromPhone: z.string().optional(),
-  driverName: z.string().min(1, { message: messages.driverNameIsRequired }),
+  // fromPhone: z.string().optional(),
   // toAddress: z.string().min(1, { message: messages.addressIsRequired }),
-  vehicleNo: z.string().min(1, { message: messages.vehicleNoIsRequired }),
+  driverName: z.string({
+    required_error: messages.driverNameIsRequired,
+  }),
+  vehicleNo: z.string({
+    required_error: messages.vehicleNoIsRequired,
+  }),
+  payTerm: z.string().min(1, { message: messages.payTermIsRequired }),
+  firm: z.string({
+    required_error: messages.firmIsRequired,
+  }),
+  customerName: z.string().min(1, { message: messages.customerNameIsRequired }),
   invoiceNumber: z.string({
     required_error: 'This field is required',
   }),
   createDate: z.date({
     required_error: messages.createDateIsRequired,
-  }),
-  vchDate: z.date({
-    required_error: messages.vchDateIsRequired,
   }),
   status: z.string({
     required_error: messages.statusIsRequired,

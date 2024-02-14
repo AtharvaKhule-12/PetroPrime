@@ -11,6 +11,8 @@ export const messages = {
   passwordsDidNotMatch: "Passwords don't match",
   vchIsRequired: 'Vch No is required',
   driverNameIsRequired: 'Driver name is required',
+  payTermIsRequired: 'Pay term is required',
+  firmIsRequired: 'Firm is required',
   vehicleNoIsRequired: 'Vehicle no is required',
   firstNameRequired: 'First name is required',
   phoneNumberIsRequired: 'Phone Number is required',

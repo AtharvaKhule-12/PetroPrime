@@ -94,6 +94,46 @@ export const driverOptions = [
   },
 ];
 
+//firm options
+export const firmOptions = [
+  {
+    value: 'Firm A',
+    label: 'Firm A',
+  },
+  {
+    value: 'Firm B',
+    label: 'Firm B',
+  },
+  {
+    value: 'Firm C',
+    label: 'Firm C',
+  },
+  {
+    value: 'Firm D',
+    label: 'Firm D',
+  },
+];
+
+//customer options
+export const customerOptions = [
+  {
+    value: 'Customer A',
+    label: 'Customer A',
+  },
+  {
+    value: 'Customer B',
+    label: 'Customer B',
+  },
+  {
+    value: 'Customer C',
+    label: 'Customer C',
+  },
+  {
+    value: 'Customer D',
+    label: 'Customer D',
+  },
+];
+
 export function renderOptionDisplayValue(value: string) {
   switch (value.toLowerCase()) {
     case 'pending':
