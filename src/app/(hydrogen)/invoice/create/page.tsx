@@ -1,12 +1,15 @@
+'use client'
 import { routes } from '@/config/routes';
 import PageHeader from '@/app/shared/page-header';
-import ImportButton from '@/app/shared/import-button';
 import CreateInvoice from '@/app/shared/invoice/create-invoice';
-import { metaObject } from '@/config/site.config';
+// import { metaObject } from '@/config/site.config';
+import { useState } from 'react';
+import ShowButton from '@/app/shared/show-table';
+import ExampleWithProviders from '@/app/shared/invoice/show-table';
 
-export const metadata = {
-  ...metaObject('Create Invoice'),
-};
+// export const metadata = {
+//   ...metaObject('Create Invoice'),
+// };
 
 const pageHeader = {
   title: 'Create Invoice',
@@ -26,13 +29,25 @@ const pageHeader = {
 };
 
 export default function InvoiceCreatePage() {
+
+  const [tableview, setTableview] = useState<boolean>(true);
+  const tableHandler = () => {
+    setTableview(!tableview)
+  }
+
   return (
     <>
       <PageHeader title={pageHeader.title} breadcrumb={pageHeader.breadcrumb}>
-        <ImportButton title="Upload File" className="mt-4 @lg:mt-0" />
+        <ShowButton func={tableHandler} title="Upload File" className="mt-4 @lg:mt-0" />
       </PageHeader>
 
-      <CreateInvoice />
+      {tableview == false ? (
+        <CreateInvoice />
+      ) : (
+        <div className='flex flex-col items-center justify-start w-full mt-8'>
+          <ExampleWithProviders/>
+        </div>
+      )}
     </>
   );
 }

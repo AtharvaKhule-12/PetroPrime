@@ -55,22 +55,30 @@ export const invoiceFormSchema = z.object({
 export type InvoiceFormTypes = z.infer<typeof invoiceFormSchema>;
 
 // invoice status options
-export const statusOptions = [
+export const frequencyOptions = [
   {
-    value: 'Paid',
-    label: 'Paid',
+    value: 'Daily',
+    label: 'Daily',
   },
   {
-    value: 'pending',
-    label: 'Pending',
+    value: 'Weekly',
+    label: 'Weekly',
   },
   {
-    value: 'overdue',
-    label: 'Overdue',
+    value: 'Monthly',
+    label: 'Monthly',
   },
   {
-    value: 'draft',
-    label: 'Draft',
+    value: 'Quaterly',
+    label: 'Quaterly',
+  },
+  {
+    value: 'Half_Yearly',
+    label: 'Half_Yearly',
+  },
+  {
+    value: 'Yearly',
+    label: 'Yearly',
   },
 ];
 

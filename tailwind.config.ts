@@ -77,6 +77,7 @@ export default {
       },
       // required these animations for the Loader component
       animation: {
+        animateBlink: 'blink 1.5s infinite ',
         blink: 'blink 1.4s infinite both;',
         'scale-up': 'scaleUp 500ms infinite alternate',
         'spin-slow': 'spin 4s linear infinite',
@@ -91,9 +92,9 @@ export default {
       },
       keyframes: {
         blink: {
-          '0%': { opacity: '0.2' },
-          '20%': { opacity: '1' },
-          '100%': { opacity: '0.2' },
+          '0%': { opacity: '1' },
+          '50%': { opacity: '0' },
+          '100%': { opacity: '1' },
         },
         scaleUp: {
           '0%': { transform: 'scale(0)' },

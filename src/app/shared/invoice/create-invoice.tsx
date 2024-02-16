@@ -11,7 +11,7 @@ import { DatePicker } from '@/components/ui/datepicker';
 import { Select } from '@/components/ui/select';
 import {
   FormBlockWrapper,
-  statusOptions,
+  frequencyOptions,
   renderOptionDisplayValue,
   driverOptions,
   firmOptions,
@@ -48,21 +48,22 @@ export default function CreateInvoice({
     { id: 1, label: 'Customer A', bal: 2.5 },
     { id: 2, label: 'Customer B', bal: 3.0 },
     { id: 3, label: 'Customer C', bal: 1.8 },
-    { id: 3, label: 'Customer D', bal: 1000 },
+    { id: 4, label: 'Customer D', bal: 1000 },
     // Add more items as needed
   ];
 
-  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  // const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [balance, setBalance] = useState<number | null>(null);
 
   const handleItemChange = (value: string) => {
+    // console.log('Selected Value:', value);
     const selectedOption = itemsData.find((item) => item.label === value) || null;
+    // console.log('Selected Option:', selectedOption);
     setBalance(selectedOption ? selectedOption.bal : null);
-    // setSelectedItem(selectedOption ? selectedOption : null)
+    // setSelectedItem(selectedOption ? selectedOption : null);
   };
 
   useEffect(() => {
-    // Log the updated balance whenever it changes
     console.log(balance);
   }, [balance]);
 
@@ -230,8 +231,8 @@ export default function CreateInvoice({
                       render={({ field: { name, onChange, value } }) => (
                         <Select
                           options={customerOptions}
-                          onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                            onChange(e)
+                          onChange={(value: string) => {
+                            onChange(value)
                             handleItemChange(value)
                           }}
                           value={value}
@@ -242,15 +243,18 @@ export default function CreateInvoice({
                         />
                       )}
                     />
-                    {balance && <div>Balance: {balance}</div>}
+                    {balance && <div className="balance text-green-500 animate-blink">Balance: {balance}</div>}
                   </div>
                   <div className="[&>.react-datepicker-wrapper]:w-full">
                     <Controller
-                      name="createDate"
+                      name="fromDate"
                       control={control}
                       render={({ field: { value, onChange } }) => (
                         <DatePicker
-                          inputProps={{ label: 'Date Create' }}
+                          inputProps={{
+                            label: 'Date From',
+                            error: errors?.fromDate?.message,
+                          }}
                           placeholderText="Select Date"
                           selected={value}
                           onChange={onChange}
@@ -259,52 +263,52 @@ export default function CreateInvoice({
                     />
                   </div>
                   <div className="[&>.react-datepicker-wrapper]:w-full">
-                    {/* <Controller
-                      name="dueDate"
+                    <Controller
+                      name="toDate"
                       control={control}
                       render={({ field: { value, onChange } }) => (
                         <DatePicker
                           inputProps={{
-                            label: 'Due Date',
-                            error: errors?.dueDate?.message,
+                            label: 'Date To',
+                            error: errors?.toDate?.message,
                           }}
                           placeholderText="Select Date"
                           selected={value}
                           onChange={onChange}
                         />
                       )}
-                    /> */}
+                    />
                   </div>
                   <Controller
-                    name="status"
+                    name="frequency"
                     control={control}
                     render={({ field: { name, onChange, value } }) => (
                       <Select
-                        options={statusOptions}
+                        options={frequencyOptions}
                         value={value}
                         onChange={onChange}
                         name={name}
-                        label="Status"
-                        error={errors?.status?.message}
+                        label="Frequency"
+                        error={errors?.frequency?.message}
                         getOptionValue={(option) => option.value}
-                        getOptionDisplayValue={(option) =>
-                          renderOptionDisplayValue(option.value as string)
-                        }
-                        displayValue={(selected: string) =>
-                          renderOptionDisplayValue(selected)
-                        }
+                        // getOptionDisplayValue={(option) =>
+                        //   renderOptionDisplayValue(option.value as string)
+                        // }
+                        // displayValue={(selected: string) =>
+                        //   renderOptionDisplayValue(selected)
+                        // }
                       />
                     )}
                   />
                 </div>
               </FormBlockWrapper>
 
-              <AddInvoiceItems
+              {/* <AddInvoiceItems
                 watch={watch}
                 control={control}
                 register={register}
                 errors={errors}
-              />
+              /> */}
             </div>
           </div>
 
@@ -314,6 +318,6 @@ export default function CreateInvoice({
           />
         </>
       )}
-    </Form>
+    </Form> 
   );
 }

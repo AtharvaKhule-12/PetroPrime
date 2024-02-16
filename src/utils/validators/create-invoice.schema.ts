@@ -26,8 +26,14 @@ export const invoiceFormSchema = z.object({
   createDate: z.date({
     required_error: messages.createDateIsRequired,
   }),
-  status: z.string({
-    required_error: messages.statusIsRequired,
+  fromDate: z.date({
+    required_error: messages.fromDateIsRequired,
+  }),
+  toDate: z.date({
+    required_error: messages.toDateIsRequired,
+  }),
+  frequency: z.string({
+    required_error: messages.frequencyIsRequired,
   }),
   shipping: z.coerce
     .number()

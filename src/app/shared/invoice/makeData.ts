@@ -1,0 +1,122 @@
+export type User = {
+    id: string;
+    itemName: string;
+    quantity: number;
+    rate: number;
+    state: string;
+  };
+  
+  export const fakeData: User[] = [
+    {
+      id: '9s41rp',
+      itemName: 'Kelvin',
+      quantity: 12,
+      rate: 34,
+      state: 'Ohio',
+    },
+    {
+      id: '08m6rx',
+      itemName: 'Molly',
+      quantity: 12,
+      rate: 34,
+      state: 'Rhode Island',
+    },
+    {
+      id: '5ymtrc',
+      itemName: 'Henry',
+      quantity: 12,
+      rate: 34,
+      state: 'California',
+    },
+    {
+      id: 'ek5b97',
+      itemName: 'Glenda',
+      quantity: 12,
+      rate: 34,
+      state: 'Montana',
+    },
+    {
+      id: 'xxtydd',
+      itemName: 'Leone',
+      quantity: 12,
+      rate: 34,
+      state: 'Colorado',
+    },
+    {
+      id: 'wzxj9m',
+      itemName: 'Mckenna',
+      quantity: 12,
+      rate: 34,
+      state: 'New York',
+    },
+    {
+      id: '21dwtz',
+      itemName: 'Wyman',
+      quantity: 12,
+      rate: 34,
+      state: 'Montana',
+    },
+    {
+      id: 'o8oe4k',
+      itemName: 'Janick',
+      quantity: 12,
+      rate: 34,
+      state: 'Nebraska',
+    },
+  ];
+  
+  //50 us states array
+  export const usStates = [
+    'Alabama',
+    'Alaska',
+    'Arizona',
+    'Arkansas',
+    'California',
+    'Colorado',
+    'Connecticut',
+    'Delaware',
+    'Florida',
+    'Georgia',
+    'Hawaii',
+    'Idaho',
+    'Illinois',
+    'Indiana',
+    'Iowa',
+    'Kansas',
+    'Kentucky',
+    'Louisiana',
+    'Maine',
+    'Maryland',
+    'Massachusetts',
+    'Michigan',
+    'Minnesota',
+    'Mississippi',
+    'Missouri',
+    'Montana',
+    'Nebraska',
+    'Nevada',
+    'New Hampshire',
+    'New Jersey',
+    'New Mexico',
+    'New York',
+    'North Carolina',
+    'North Dakota',
+    'Ohio',
+    'Oklahoma',
+    'Oregon',
+    'Pennsylvania',
+    'Rhode Island',
+    'South Carolina',
+    'South Dakota',
+    'Tennessee',
+    'Texas',
+    'Utah',
+    'Vermont',
+    'Virginia',
+    'Washington',
+    'West Virginia',
+    'Wisconsin',
+    'Wyoming',
+    'Puerto Rico',
+  ];
+  
