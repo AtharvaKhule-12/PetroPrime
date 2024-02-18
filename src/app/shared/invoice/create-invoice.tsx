@@ -52,27 +52,17 @@ export default function CreateInvoice({
     // Add more items as needed
   ];
 
-  // const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [balance, setBalance] = useState<number | null>(null);
 
   const handleItemChange = (value: string) => {
-    // console.log('Selected Value:', value);
     const selectedOption = itemsData.find((item) => item.label === value) || null;
-    // console.log('Selected Option:', selectedOption);
     setBalance(selectedOption ? selectedOption.bal : null);
-    // setSelectedItem(selectedOption ? selectedOption : null);
   };
 
   useEffect(() => {
     console.log(balance);
   }, [balance]);
 
-  // const onChangeWithAdditionalFunction = (onChange: (...event: any[]) => void, selectedOption: string, additionalFunction: (option: string) => void) => {
-  //   return (e: ChangeEvent<HTMLSelectElement>) => {
-  //     additionalFunction(selectedOption);
-  //     onChange(selectedOption)
-  //   };
-  // };
 
   const onSubmit: SubmitHandler<InvoiceFormInput> = (data) => {
     toast.success(
@@ -115,7 +105,6 @@ export default function CreateInvoice({
           ...record,
           invoiceNumber: 'INV-0071',
           createDate: new Date(),
-          // status: 'draft',
           items: newItems,
         },
       }}
@@ -127,7 +116,6 @@ export default function CreateInvoice({
             <div className="grid grid-cols-1 gap-8 divide-y divide-dashed divide-gray-200 @2xl:gap-10 @3xl:gap-12">
               <FormBlockWrapper
                 title={'Voucher details:'}
-              // description={'From he who sending this invoice'}
               >
                 <Input
                   label="Vch no"
@@ -150,19 +138,10 @@ export default function CreateInvoice({
                     />
                   )}
                 />
-                {/* <Textarea
-                  label="Address"
-                  placeholder="Enter your address"
-                  {...register('fromAddress')}
-                  error={errors.fromAddress?.message}
-                  textareaClassName="h-20"
-                  className="col-span-2"
-                /> */}
               </FormBlockWrapper>
 
               <FormBlockWrapper
                 title={'Driver details:'}
-                // description={'To he who will receive this invoice'}
                 className="pt-7 @2xl:pt-9 @3xl:pt-11"
               >
                 <Controller
@@ -291,24 +270,14 @@ export default function CreateInvoice({
                         label="Frequency"
                         error={errors?.frequency?.message}
                         getOptionValue={(option) => option.value}
-                        // getOptionDisplayValue={(option) =>
-                        //   renderOptionDisplayValue(option.value as string)
-                        // }
-                        // displayValue={(selected: string) =>
-                        //   renderOptionDisplayValue(selected)
-                        // }
                       />
                     )}
                   />
                 </div>
               </FormBlockWrapper>
 
-              {/* <AddInvoiceItems
-                watch={watch}
-                control={control}
-                register={register}
-                errors={errors}
-              /> */}
+              
+
             </div>
           </div>
 

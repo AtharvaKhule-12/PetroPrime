@@ -8,7 +8,7 @@ import StatusField from '@/components/controlled-table/status-field';
 import { Button } from '@/components/ui/button';
 import { getDateRangeStateValues } from '@/utils/get-formatted-date';
 import { useMedia } from '@/hooks/use-media';
-import { renderOptionDisplayValue, statusOptions } from '../form-utils';
+import { renderOptionDisplayValue, frequencyOptions } from '../form-utils';
 
 type FilterElementProps = {
   isFiltered: boolean;
@@ -45,7 +45,7 @@ export default function FilterElement({
           },
         })}
       />
-      <DateFiled
+      {/* <DateFiled
         selected={getDateRangeStateValues(filters['dueDate'][0])}
         startDate={getDateRangeStateValues(filters['dueDate'][0])}
         endDate={getDateRangeStateValues(filters['dueDate'][1])}
@@ -59,18 +59,18 @@ export default function FilterElement({
             labelClassName: 'font-medium text-gray-700',
           },
         })}
-      />
+      /> */}
       <StatusField
-        options={statusOptions}
-        value={filters['status']}
+        options={frequencyOptions}
+        value={filters['frequency']}
         onChange={(value: string) => {
-          updateFilter('status', value);
+          updateFilter('frequency', value);
         }}
         getOptionValue={(option) => option.value}
-        getOptionDisplayValue={(option) =>
-          renderOptionDisplayValue(option.value as string)
-        }
-        displayValue={(selected: string) => renderOptionDisplayValue(selected)}
+        // getOptionDisplayValue={(option) =>
+        //   renderOptionDisplayValue(option.value as string)
+        // }
+        // displayValue={(selected: string) => renderOptionDisplayValue(selected)}
         className={'w-auto'}
         {...(isMediumScreen && {
           label: 'Status',
