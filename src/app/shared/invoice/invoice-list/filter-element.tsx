@@ -26,45 +26,30 @@ export default function FilterElement({
   const isMediumScreen = useMedia('(max-width: 1860px)', false);
   return (
     <>
-      <PriceField
+      {/* <PriceField
         value={filters['amount']}
         onChange={(data) => updateFilter('amount', data)}
-      />
-      <DateFiled
-        selected={getDateRangeStateValues(filters['createdAt'][0])}
-        startDate={getDateRangeStateValues(filters['createdAt'][0])}
-        endDate={getDateRangeStateValues(filters['createdAt'][1])}
-        onChange={(date: any) => {
-          updateFilter('createdAt', date);
-        }}
-        placeholderText="Select created date"
-        {...(isMediumScreen && {
-          inputProps: {
-            label: 'Created Date',
-            labelClassName: 'font-medium text-gray-700',
-          },
-        })}
-      />
-      {/* <DateFiled
-        selected={getDateRangeStateValues(filters['dueDate'][0])}
-        startDate={getDateRangeStateValues(filters['dueDate'][0])}
-        endDate={getDateRangeStateValues(filters['dueDate'][1])}
-        onChange={(date: any) => {
-          updateFilter('dueDate', date);
-        }}
-        placeholderText="Select due date"
-        {...(isMediumScreen && {
-          inputProps: {
-            label: 'Due Date',
-            labelClassName: 'font-medium text-gray-700',
-          },
-        })}
       /> */}
+      <DateFiled
+        selected={getDateRangeStateValues(filters['date'][0])}
+        startDate={getDateRangeStateValues(filters['date'][0])}
+        endDate={getDateRangeStateValues(filters['date'][1])}
+        onChange={(date: any) => {
+          updateFilter('date', date);
+        }}
+        placeholderText="Select date"
+        {...(isMediumScreen && {
+          inputProps: {
+            label: 'Date',
+            labelClassName: 'font-medium text-gray-700',
+          },
+        })}
+      />
       <StatusField
         options={frequencyOptions}
-        value={filters['frequency']}
+        value={filters['party']}
         onChange={(value: string) => {
-          updateFilter('frequency', value);
+          updateFilter('party', value);
         }}
         getOptionValue={(option) => option.value}
         // getOptionDisplayValue={(option) =>

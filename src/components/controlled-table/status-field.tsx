@@ -5,7 +5,7 @@ import {
 } from '@/components/ui/select';
 
 export default function StatusField({
-  placeholder = 'Select status',
+  placeholder = 'Select party',
   ...props
 }: SelectProps<SelectOption>) {
   return (

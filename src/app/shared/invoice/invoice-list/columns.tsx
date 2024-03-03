@@ -51,97 +51,70 @@ function getStatusBadge(status: string) {
 type Columns = {
   data: any[];
   sortConfig?: any;
-  handleSelectAll: any;
-  checkedItems: string[];
+  // handleSelectAll: any;
+  // checkedItems: string[];
   onDeleteItem: (id: string) => void;
   onHeaderCellClick: (value: string) => void;
-  onChecked?: (id: string) => void;
+  // onChecked?: (id: string) => void;
 };
 
 export const getColumns = ({
   data,
   sortConfig,
-  checkedItems,
+  // checkedItems,
   onDeleteItem,
   onHeaderCellClick,
-  handleSelectAll,
-  onChecked,
+  // handleSelectAll,
+  // onChecked,
 }: Columns) => [
   {
-    title: (
-      <div className="ps-2">
-        <Checkbox
-          title={'Select All'}
-          onChange={handleSelectAll}
-          checked={checkedItems.length === data.length}
-          className="cursor-pointer"
-        />
-      </div>
-    ),
-    dataIndex: 'checked',
-    key: 'checked',
+    title: <HeaderCell title="Ch No" />,
+    dataIndex: 'ch_no',
+    key: 'ch_no',
     width: 30,
-    render: (_: any, row: any) => (
-      <div className="inline-flex ps-2">
-        <Checkbox
-          className="cursor-pointer"
-          checked={checkedItems.includes(row.id)}
-          {...(onChecked && { onChange: () => onChecked(row.id) })}
-        />
-      </div>
+    render: (value: number) => (
+      <Text className="font-medium text-gray-700 dark:text-gray-600">
+        {value}
+      </Text>
     ),
   },
   {
-    title: <HeaderCell title="Customer" />,
-    dataIndex: 'customer',
-    key: 'customer',
+    title: <HeaderCell title="Bill No" />,
+    dataIndex: 'bill_no',
+    key: 'bill_no',
+    width: 30,
+    render: (value: number) => (
+      <Text className="font-medium text-gray-700 dark:text-gray-600">
+        {value}
+      </Text>
+    ),
+  },
+  {
+    title: <HeaderCell title="Party Name" />,
+    dataIndex: 'party',
+    key: 'party',
     width: 250,
-    hidden: 'customer',
+    hidden: 'party',
 
-    render: (_: string, row: Invoice) => (
-      <AvatarCard
-        src={row.avatar}
-        name={row.name}
-        description={`INV-${row.id}`}
-      />
+    render: (value: string) => (
+      <Text className="font-medium text-gray-700 dark:text-gray-600">
+        {value}
+      </Text>
     ),
-  },
-  {
-    title: <HeaderCell title="Email" />,
-    dataIndex: 'email',
-    key: 'email',
-    width: 250,
-    render: (email: string) => email.toLowerCase(),
   },
   {
     title: (
       <HeaderCell
-        title="Created"
+        title="Date"
         sortable
         ascending={
-          sortConfig?.direction === 'asc' && sortConfig?.key === 'createdAt'
+          sortConfig?.direction === 'asc' && sortConfig?.key === 'date'
         }
       />
     ),
-    onHeaderCell: () => onHeaderCellClick('createdAt'),
-    dataIndex: 'createdAt',
-    key: 'createdAt',
-    width: 200,
-    render: (value: Date) => <DateCell date={value} />,
-  },
-  {
-    title: (
-      <HeaderCell
-        title="Due Date"
-        sortable
-        ascending={
-          sortConfig?.direction === 'asc' && sortConfig?.key === 'dueDate'
-        }
-      />
-    ),
-    onHeaderCell: () => onHeaderCellClick('dueDate'),
-    dataIndex: 'dueDate',
-    key: 'dueDate',
+    onHeaderCell: () => onHeaderCellClick('date'),
+    dataIndex: 'date',
+    key: 'date',
     width: 200,
     render: (value: Date) => <DateCell date={value} />,
   },
@@ -161,7 +134,7 @@ export const getColumns = ({
     width: 200,
     render: (value: string) => (
       <Text className="font-medium text-gray-700 dark:text-gray-600">
-        ${value}
+        ₹{value}
       </Text>
     ),
   },

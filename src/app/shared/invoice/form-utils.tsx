@@ -57,28 +57,16 @@ export type InvoiceFormTypes = z.infer<typeof invoiceFormSchema>;
 // invoice status options
 export const frequencyOptions = [
   {
-    value: 'Daily',
-    label: 'Daily',
+    value: 'Atharva',
+    label: 'Atharva',
   },
   {
-    value: 'Weekly',
-    label: 'Weekly',
+    value: 'Aryan',
+    label: 'Aryan',
   },
   {
-    value: 'Monthly',
-    label: 'Monthly',
-  },
-  {
-    value: 'Quaterly',
-    label: 'Quaterly',
-  },
-  {
-    value: 'Half_Yearly',
-    label: 'Half_Yearly',
-  },
-  {
-    value: 'Yearly',
-    label: 'Yearly',
+    value: 'Francis',
+    label: 'Francis',
   },
 ];
 
@@ -139,6 +127,44 @@ export const customerOptions = [
   {
     value: 'Customer D',
     label: 'Customer D',
+  },
+];
+
+export const items = [
+  {
+    value: 'Customer A',
+    label: 'Customer A',
+  },
+  {
+    value: 'Customer B',
+    label: 'Customer B',
+  },
+  {
+    value: 'Customer C',
+    label: 'Customer C',
+  },
+  {
+    value: 'Customer D',
+    label: 'Customer D',
+  },
+];
+
+export const GST = [
+  {
+    value: 0,
+    label: 'None',
+  },
+  {
+    value: 5,
+    label: 'GST 5%',
+  },
+  {
+    value: 12,
+    label: 'GST 12%',
+  },
+  {
+    value: 18,
+    label: 'GST 18%',
   },
 ];
 

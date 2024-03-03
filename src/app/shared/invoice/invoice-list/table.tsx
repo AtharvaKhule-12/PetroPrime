@@ -7,6 +7,7 @@ import { useColumn } from '@/hooks/use-column';
 import { Button } from '@/components/ui/button';
 import ControlledTable from '@/components/controlled-table';
 import { getColumns } from '@/app/shared/invoice/invoice-list/columns';
+
 const FilterElement = dynamic(
   () => import('@/app/shared/invoice/invoice-list/filter-element'),
   { ssr: false }
@@ -16,10 +17,8 @@ const TableFooter = dynamic(() => import('@/app/shared/table-footer'), {
 });
 
 const filterState = {
-  amount: ['', ''],
-  createdAt: [null, null],
-  dueDate: [null, null],
-  status: '',
+  "date": [null, null],
+  "party": '',
 };
 
 export default function InvoiceTable({ data = [] }: { data: any[] }) {
@@ -62,21 +61,21 @@ export default function InvoiceTable({ data = [] }: { data: any[] }) {
       getColumns({
         data,
         sortConfig,
-        checkedItems: selectedRowKeys,
+        // checkedItems: selectedRowKeys,
         onHeaderCellClick,
         onDeleteItem,
-        onChecked: handleRowSelect,
-        handleSelectAll,
+        // onChecked: handleRowSelect,
+        // handleSelectAll,
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [
-      selectedRowKeys,
+      // selectedRowKeys,
       onHeaderCellClick,
       sortConfig.key,
       sortConfig.direction,
       onDeleteItem,
-      handleRowSelect,
-      handleSelectAll,
+      // handleRowSelect,
+      // handleSelectAll,
     ]
   );
 
@@ -119,20 +118,6 @@ export default function InvoiceTable({ data = [] }: { data: any[] }) {
             updateFilter={updateFilter}
             handleReset={handleReset}
           />
-        }
-        tableFooter={
-          <TableFooter
-            checkedItems={selectedRowKeys}
-            handleDelete={(ids: string[]) => {
-              setSelectedRowKeys([]);
-              handleDelete(ids);
-            }}
-          >
-            <Button size="sm" className="dark:bg-gray-300 dark:text-gray-800">
-              Re-send {selectedRowKeys.length}{' '}
-              {selectedRowKeys.length > 1 ? 'Invoices' : 'Invoice'}{' '}
-            </Button>
-          </TableFooter>
         }
         className="overflow-hidden rounded-md border border-muted text-sm shadow-sm [&_.rc-table-placeholder_.rc-table-expanded-row-fixed>div]:h-60 [&_.rc-table-placeholder_.rc-table-expanded-row-fixed>div]:justify-center [&_.rc-table-row:last-child_td.rc-table-cell]:border-b-0 [&_thead.rc-table-thead]:border-t-0"
       />

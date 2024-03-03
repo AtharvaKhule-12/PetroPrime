@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { messages } from '@/config/messages';
 
 export const invoiceFormSchema = z.object({
-  fromVchno: z.string().min(1, { message: messages.vchIsRequired }),
+  Vchno: z.string().min(1, { message: messages.vchIsRequired }),
   vchDate: z.date({
     required_error: messages.vchDateIsRequired,
   }),
@@ -20,12 +20,6 @@ export const invoiceFormSchema = z.object({
     required_error: messages.firmIsRequired,
   }),
   customerName: z.string().min(1, { message: messages.customerNameIsRequired }),
-  invoiceNumber: z.string({
-    required_error: 'This field is required',
-  }),
-  createDate: z.date({
-    required_error: messages.createDateIsRequired,
-  }),
   fromDate: z.date({
     required_error: messages.fromDateIsRequired,
   }),
@@ -35,21 +29,36 @@ export const invoiceFormSchema = z.object({
   frequency: z.string({
     required_error: messages.frequencyIsRequired,
   }),
-  shipping: z.coerce
-    .number()
-    .min(1, { message: messages.shippingPriceIsRequired }),
-  discount: z.coerce.number().min(1, { message: messages.discountIsRequired }),
-  taxes: z.coerce.number().min(1, { message: messages.taxIsRequired }),
+  // itemName: z.string().min(1, { message: messages.itemNameIsRequired }),
+  // invoiceNumber: z.string({
+  //   required_error: 'This field is required',
+  // }),
+  // createDate: z.date({
+  //   required_error: messages.createDateIsRequired,
+  // }),
+  // shipping: z.coerce
+  //   .number()
+  //   .min(1, { message: messages.shippingPriceIsRequired }),
+  // discount: z.coerce.number().min(1, { message: messages.discountIsRequired }),
   items: z.array(
     z.object({
       item: z.string().min(1, { message: messages.itemNameIsRequired }),
-      description: z.string().min(1, { message: messages.itemDescIsRequired }),
-      quantity: z.coerce
-        .number()
-        .min(1, { message: messages.itemQtyIsRequired }),
-      price: z.coerce
-        .number()
-        .min(1, { message: messages.itemPriceIsRequired }),
+      // description: z.string().min(1, { message: messages.itemDescIsRequired }),
+      qty: z.coerce
+      .number()
+      .min(1, { message: messages.itemQtyIsRequired }),
+      rate: z.coerce
+      .number()
+      .min(1, { message: messages.itemRateIsRequired }),
+      disc: z.coerce
+      .number()
+      .min(1, { message: messages.discountIsRequired }),
+      GST: z.coerce
+      .number()
+      .min(1, { message: messages.taxIsRequired }),
+      // amt: z.coerce
+      //   .number()
+      //   .min(1, { message: messages.itemAmtIsRequired }),
     })
   ),
 });
