@@ -9,6 +9,8 @@ const FileUpload = dynamic(() => import('@/app/shared/file-upload'), {
   ssr: false,
 });
 
+// start
+
 export const metadata = {
   ...metaObject('File Manager'),
 };
